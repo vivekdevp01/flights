@@ -52,18 +52,19 @@ throw error;
         }
     }
     async update(id,data){
-        try{
+        
             const response=await this.model.update(data,{
                 where:{
                     id:id
                 }
             });
+            if(response[0]==0){
+                throw new AppError("not able to find the ",StatusCodes.NOT_FOUND);
+            }
             return response;
-        }
-        catch(error){
-logger.error("Something get aerror get")
-throw error;
-        }
+
+     
+l
     }
 }
 module.exports=CrudRepository;

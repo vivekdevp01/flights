@@ -65,13 +65,32 @@ async function destroyAirplane(req,res){
      ErrorResponse.error=error;
      console.log(ErrorResponse);
      return res
-     .status(error.StatusCode)
+     .status(error.statusCode)
      .json(ErrorResponse);
   }
 }
+async function updateAirplane(req, res) {
+  try {
+      const airplane = await AirplaneService.updateAirplane(req.params.id, {
+          modelNumber: req.body.modelNumber,
+          capacity: req.body.capacity
+      });
+      SuccessResponse.data = airplane;
+      return res
+              .status(StatusCodes.ACCEPTED)
+              .json(SuccessResponse);
+  }   catch(error){
+      ErrorResponse.error = error;
+      return res
+              .status(error.StatusCode)
+              .json(ErrorResponse);
+  }
+}
+
 module.exports={
     createAirplane,
     getAirplanes,
     getAirplane,
-    destroyAirplane
+    destroyAirplane,
+    updateAirplane
 }
