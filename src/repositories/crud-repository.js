@@ -1,4 +1,6 @@
 const { logger }=require('../config')
+const {StatusCodes}=require('http-status-codes');
+const AppError=require('../utils/errors/app-error');
 class CrudRepository{
     constructor(model){
         this.model=model;
@@ -9,33 +11,35 @@ class CrudRepository{
             return response;
         }
         catch(error){
-logger.error("Something get aerror get")
-throw error;
+         logger.error("Something get aerror get")
+        throw error;
         }
     }
     async destroy(data){
-        try{
+        
             const response=await this.model.destroy({
                 where:{
                     id:data
                 }
+
             });
+            if(!response){
+                throw new AppError('not able to find the resource',StatusCodes.NOT_FOUND)
+                    }
             return response;
-        }
-        catch(error){
-logger.error("Something get aerror destroy")
-throw error;
-        }
     }
     async get(data){
-        try{
+        // try{
             const response=await this.model.findByPk(data);
+            if(!response){
+        throw new AppError('not able to find the resource',StatusCodes.NOT_FOUND)
+            }
             return response;
-        }
-        catch(error){
-logger.error("Something get aerror find")
-throw error;
-        }
+        // }
+//         catch(error){
+// logger.error("Something get aerror find")
+// throw error;
+//         }
     }
     async getAll(){
         try{
