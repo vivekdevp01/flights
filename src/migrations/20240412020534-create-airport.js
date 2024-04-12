@@ -12,7 +12,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull:false,
-      unique:true
+        unique:true
       },
       code: {
         type: Sequelize.STRING,
@@ -21,8 +21,7 @@ module.exports = {
       },
       address: {
         type: Sequelize.STRING,
-      unique:true
-        
+        unique:true
       },
       cityId: {
         type: Sequelize.INTEGER,
