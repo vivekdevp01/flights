@@ -9,8 +9,8 @@ async function createFlight(req,res){
           airplaneId:req.body.airplaneId,
           departureAirportId:req.body.departureAirportId,
           arrivalAirportId:req.body.arrivalAirportId,
-          departureTime:req.body.departureTime,
           arrivalTime:req.body.arrivalTime,
+          departureTime:req.body.departureTime,
           price:req.body.price,
           boardingGate:req.body.boardingGate,
           totalSeats:req.body.totalSeats
@@ -28,6 +28,24 @@ async function createFlight(req,res){
         .json(ErrorResponse);
       }
 } 
+async function getAllFlights(req,res){
+    try{
+const flights=await FlightService.getAllFlights(req.query);
+        SuccessResponse.data=flights;
+        // console.log(flight);
+        return res
+        .status(StatusCodes.CREATED)
+        .json(SuccessResponse);
+    }
+    catch(error){
+        ErrorResponse.error=error;
+        return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json(ErrorResponse);
+    }
+}
+
 module.exports={
-    createFlight
+    createFlight,
+    getAllFlights
 }

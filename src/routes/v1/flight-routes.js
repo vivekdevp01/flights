@@ -5,6 +5,8 @@ const router=express.Router();
 router.post('/',
 FlightMiddlewares.validateCreateRequest,
 FlightController.createFlight);
+router.get('/',
+FlightController.getAllFlights);
 // router.get('/',AirportController.getAirports);
 // router.get('/:id',AirportController.getAirport);
 // router.delete('/:id',AirportController.destroyAirport);
