@@ -7,6 +7,9 @@ FlightMiddlewares.validateCreateRequest,
 FlightController.createFlight);
 router.get('/',
 FlightController.getAllFlights);
+router.get('/:id',FlightController.getFlight);
+router.patch('/:id/seats',FlightMiddlewares.validateUpdateSeats,
+FlightController.updateSeats);
 // router.get('/',AirportController.getAirports);
 // router.get('/:id',AirportController.getAirport);
 // router.delete('/:id',AirportController.destroyAirport);
